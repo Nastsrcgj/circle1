@@ -26,6 +26,7 @@ jobs:
         pip install --upgrade pip
         pip install pytelegrambotapi moviepy imageio[ffmpeg]
         pip install pyTelegramBotAPI
+        pip install python-telegram-bot
 
     - name: Run bot
       env:
