@@ -1,19 +1,8 @@
-# main.py
 import logging
-import telegram
 from telegram import Update
-# Импортируем ParseMode и CallbackQueryHandler
+from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes, CallbackQueryHandler, Defaults
 from telegram.constants import ParseMode
-from telegram.ext import (
-    Application,
-    CommandHandler,
-    MessageHandler,
-    filters,
-    ContextTypes,
-    CallbackQueryHandler,
-    Defaults # Defaults все еще нужен для parse_mode
-)
-from config import API_TOKEN
+from config import API_TOKEN  # Предполагается, что ваш токен хранится в файле config.py
 from handlers import start, process_media, button_handler
 import asyncio
 
@@ -38,16 +27,13 @@ def main():
     )
 
     # --- Создание Application с таймаутами ---
-    # Таймауты задаются через методы builder'а
     application = (
         Application.builder()
         .token(API_TOKEN)
         .defaults(bot_defaults)
         .read_timeout(30)  # Время ожидания ответа от сервера (секунды)
         .write_timeout(30) # Время ожидания при отправке данных (секунды)
-        .connect_timeout(10)# Время ожидания установки соединения (секунды)
-        # Можно также задать общий таймаут для пулинга, если нужно
-        # .pool_timeout(10)
+        .connect_timeout(10) # Время ожидания установки соединения (секунды)
         .build()
     )
 
