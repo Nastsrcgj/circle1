@@ -31,5 +31,5 @@ jobs:
         BOT_TOKEN: ${{ secrets.BOT_TOKEN }}  # Передача токена из GitHub Secrets
       run: |
         echo "Запуск бота..."
-        python3 bot.py >> log.txt 2>&1 &  # Запуск бота в фоне с логированием
+        python3 main.py >> log.txt 2>&1 &  # Запуск бота в фоне с логированием
         tail -f log.txt  # Чтение логов в реальном времени
