@@ -1,0 +1,35 @@
+name: Telegram Bot
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # запуск каждый час
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install pytelegrambotapi moviepy imageio[ffmpeg]
+
+    - name: Run bot
+      env:
+        BOT_TOKEN: ${{ secrets.BOT_TOKEN }}  # Передача токена из GitHub Secrets
+      run: |
+        echo "Запуск бота..."
+        python3 bot.py >> log.txt 2>&1 &  # Запуск бота в фоне с логированием
+        tail -f log.txt  # Чтение логов в реальном времени
