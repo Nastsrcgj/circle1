@@ -1,5 +1,6 @@
 # main.py
 import logging
+import telegram
 from telegram import Update
 # Импортируем ParseMode и CallbackQueryHandler
 from telegram.constants import ParseMode
