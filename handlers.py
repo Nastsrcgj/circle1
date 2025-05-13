@@ -2,7 +2,7 @@
 import logging
 import os
 import re
-from moviepy.editor import VideoFileClip
+from moviepy import VideoFileClip
 from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.error import BadRequest, TimedOut
 from telegram.ext import CallbackContext
